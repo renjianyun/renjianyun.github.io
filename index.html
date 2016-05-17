@@ -160,7 +160,87 @@ $ npm install
 </tbody>
 </table>
 <p>#常用命令</p>
-
+<p><strong>新建一篇文章 </strong></p>
+<pre><code>$ hexo new [layout] &lt;title&gt;
+</code></pre><p><strong>生成静态文件</strong></p>
+<pre><code>$ hexo generate
+</code></pre><table>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-d, –deploy</td>
+<td>文件生成后立即部署网站</td>
+</tr>
+<tr>
+<td>-w, –watch</td>
+<td>监视文件变动</td>
+</tr>
+</tbody>
+</table>
+<p><strong>发表草稿</strong></p>
+<pre><code>$ hexo publish [layout] &lt;filename&gt;
+</code></pre><p><strong>启动服务器</strong></p>
+<pre><code>$ hexo server
+</code></pre><table>
+<thead>
+<tr>
+<th>选项</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-p, –port</td>
+<td>重设端口</td>
+</tr>
+<tr>
+<td>-s, –static</td>
+<td>只使用静态文件</td>
+</tr>
+<tr>
+<td>-l, –log</td>
+<td>启动日记记录，使用覆盖记录格式</td>
+</tr>
+</tbody>
+</table>
+<p><strong>部署网站</strong></p>
+<pre><code>$ hexo deploy
+</code></pre><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>-g, –generate</td>
+<td>部署之前预先生成静态文件</td>
+</tr>
+</tbody>
+</table>
+<p><strong>渲染文件</strong><br>|参数|    描述<br>|-|-|<br>|-o, –output|    设置输出路径</p>
+<p><em>其他内容请参考官网</em><br><a href="https://hexo.io" target="_blank" rel="external">https://hexo.io</a></p>
+<p>#发布到GitHub</p>
+<p><strong>建立Repository</strong></p>
+<p>建立与你用户名对应的仓库，仓库名必须为【your_user_name.github.io】，固定写法。配置公钥（不清楚了去找Git的教程）。</p>
+<p><strong>配置和本地文联：</strong><br>在 _config.yml中 改成我这样子的：</p>
+<pre><code>deply:
+    type: git
+</code></pre><p>安装hexo-deployer-git</p>
+<pre><code>$ npm install hexo-deployer-git --save
+</code></pre><p>修改配置。</p>
+<pre><code>deploy:
+  type: git
+  repo: &lt;repository url&gt;
+  branch: [branch]
+  message: [message]
+</code></pre>
       
     </div>
     <footer class="article-footer">

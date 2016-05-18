@@ -1,0 +1,68 @@
+<!DOCTYPE html><html lang="zh-cn"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content="这是任简云（王涛）的个人博客，用来发布一些前端和编程人生原创文章。"><title>Node概述 | 任简云的个人博客</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=0.0.0"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/normalize/4.1.1/normalize.min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/pure-min.css"><link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/pure/0.6.0/grids-responsive-min.css"><link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.2/css/font-awesome.min.css"><script type="text/javascript" src="//cdn.bootcss.com/jquery/2.2.3/jquery.min.js"></script><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">Node概述</h1><a id="logo" href="/.">任简云的个人博客</a><p class="description">酷爱前端，对编程有一种痴迷和任性。</p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/about/"><i class="fa fa-user"> 关于</i></a><a href="/atom.xml"><i class="fa fa-rss"> 订阅</i></a></div></div><div id="layout" class="pure-g"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">Node概述</h1><div class="post-meta">May 18, 2016<span> | </span><span class="category"><a href="/categories/Node-js/">Node.js</a></span><script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js" async></script><span id="busuanzi_container_page_pv"> | <span id="busuanzi_value_page_pv"></span><span> Hits</span></span></div><a data-thread-key="2016/05/18/Node概述/" href="/2016/05/18/Node概述/#comments" class="ds-thread-count"></a><div class="clear"><div id="toc" class="toc-article"><div class="toc-title">Inhalte</div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Node-js是什么"><span class="toc-number">1.</span> <span class="toc-text">Node.js是什么?</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#一个简单的服务器"><span class="toc-number">2.</span> <span class="toc-text">一个简单的服务器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#异步操作"><span class="toc-number">3.</span> <span class="toc-text">异步操作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#全局对象和全局变量"><span class="toc-number">4.</span> <span class="toc-text">全局对象和全局变量</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#模块化结构"><span class="toc-number"></span> <span class="toc-text">模块化结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#核心模块"><span class="toc-number">1.</span> <span class="toc-text">核心模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#自定义模块"><span class="toc-number">2.</span> <span class="toc-text">自定义模块</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#异常处理"><span class="toc-number">3.</span> <span class="toc-text">异常处理</span></a></li></ol></div></div><div class="post-content"><h2 id="Node-js是什么"><a href="#Node-js是什么" class="headerlink" title="Node.js是什么?"></a>Node.js是什么?</h2><blockquote>
+<p>Node.js 是一个基于 Chrome V8 引擎的 JavaScript 运行环境。Node.js 使用了一个事件驱动、非阻塞式 I/O 的模型，使其轻量又高效。Node.js 的包管理器 npm，是全球最大的开源库生态系统。<a href="http://nodejs.cn/" target="_blank" rel="external">node.cn</a></p>
+</blockquote>
+<h2 id="一个简单的服务器"><a href="#一个简单的服务器" class="headerlink" title="一个简单的服务器"></a>一个简单的服务器</h2><pre><code>const http = require(&apos;http&apos;);
+
+const hostname = &apos;127.0.0.1&apos;;
+const port = 1337;
+
+http.createServer((req, res) =&gt; {
+  res.writeHead(200, { &apos;Content-Type&apos;: &apos;text/plain&apos; });
+  res.end(&apos;Hello World\n&apos;);
+}).listen(port, hostname, () =&gt; {
+  console.log(`Server running at http://${hostname}:${port}/`);
+});
+</code></pre><h2 id="异步操作"><a href="#异步操作" class="headerlink" title="异步操作"></a>异步操作</h2><p>特点就是单线程运行，导致大量采用异步操作。</p>
+<p>Node约定，调用和定义参数时，回调函数的的第一个为错误对象</p>
+<h2 id="全局对象和全局变量"><a href="#全局对象和全局变量" class="headerlink" title="全局对象和全局变量"></a>全局对象和全局变量</h2><blockquote>
+<p>global：表示Node所在的全局环境，类似于浏览器的window对象。需要注意的是，如果在浏览器中声明一个全局变量，实际上是声明了一个全局对象的属性，比如var x = 1等同于设置window.x = 1，但是Node不是这样，至少在模块中不是这样（REPL环境的行为与浏览器一致）。在模块文件中，声明var x = 1，该变量不是global对象的属性，global.x等于undefined。这是因为模块的全局变量都是该模块私有的，其他模块无法取到。<br>process：该对象表示Node所处的当前进程，允许开发者与该进程互动。<br>console：指向Node内置的console模块，提供命令行环境中的标准输入、标准输出功能。</p>
+</blockquote>
+<h1 id="模块化结构"><a href="#模块化结构" class="headerlink" title="模块化结构"></a>模块化结构</h1><p>Node.js 采有模块化结构，按照CommonJS规范定义和使用模块。</p>
+<h2 id="核心模块"><a href="#核心模块" class="headerlink" title="核心模块"></a>核心模块</h2><ul>
+<li>http：提供HTTP服务器功能。</li>
+<li>url：解析URL。</li>
+<li>fs：与文件系统交互。</li>
+<li>querystring：解析URL的查询字符串。</li>
+<li>child_process：新建子进程。</li>
+<li>util：提供一系列实用小工具。</li>
+<li>path：处理文件路径。</li>
+<li>crypto：提供加密和解密功能，基本上是对OpenSSL的包装。</li>
+</ul>
+<p><em>核心模块总是最优加载的</em></p>
+<h2 id="自定义模块"><a href="#自定义模块" class="headerlink" title="自定义模块"></a>自定义模块</h2><pre><code>// foo.js
+module.exports = function(x) {
+    console.log(x);
+};
+</code></pre><p>模块的使用</p>
+<pre><code>// index.js
+var m = require(&apos;./foo&apos;);
+m(&quot;这是自定义模块&quot;);
+</code></pre><h2 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h2><p>一般Node有三种方法传播一个错误</p>
+<ul>
+<li>使用throw语句抛出一个错误对象，即抛出异常。</li>
+<li>将错误对象传递给回调函数，由回调函数负责发出错误。</li>
+<li>通过EventEmitter接口，发出一个error事件。</li>
+</ul>
+<p><code>try...chtch</code> 结构无法捕获异步抛出的异常。</p>
+<p>Node采用的方法，是将错误对象作为第一个参数，传入回调函数。这样就避免了捕获代码与发生错误的代码不在同一个时间段的问题。</p>
+<pre><code>fs.readFile(&apos;/foo.txt&apos;, function(err, data) {
+  if (err !== null) throw err;
+  console.log(data);
+});
+</code></pre></div><script type="text/javascript" src="/js/share.js?v=0.0.0" async></script><a data-url="http://renjianyun.github.io/2016/05/18/Node概述/" data-id="ciocsdd6n0006joue3xlezrxs" class="article-share-link">Aktie</a><div class="tags"><a href="/tags/Node-js/">Node.js</a></div><div class="post-nav"><a href="/2016/05/18/Hexo常用设置/" class="next">Hexo常用设置</a></div><div data-thread-key="2016/05/18/Node概述/" data-title="Node概述" data-url="http://renjianyun.github.io/2016/05/18/Node概述/" class="ds-share flat"><div class="ds-share-inline"><ul class="ds-share-icons-16"><li data-toggle="ds-share-icons-more"><a href="javascript:void(0);" class="ds-more">分享到：</a></li><li><a href="javascript:void(0);" data-service="weibo" class="ds-weibo">微博</a></li><li><a href="javascript:void(0);" data-service="qzone" class="ds-qzone">QQ空间</a></li><li><a href="javascript:void(0);" data-service="qqt" class="ds-qqt">腾讯微博</a></li><li><a href="javascript:void(0);" data-service="wechat" class="ds-wechat">微信</a></li></ul><div class="ds-share-icons-more"></div></div></div><div data-thread-key="2016/05/18/Node概述/" data-title="Node概述" data-url="http://renjianyun.github.io/2016/05/18/Node概述/" data-author-key="1" class="ds-thread"></div></div></div></div><div class="pure-u-1-4"><div id="sidebar"><div class="widget"><form action="//www.baidu.com/baidu" method="get" accept-charset="utf-8" target="_blank" class="search-form"><input type="search" name="word" maxlength="20" placeholder="Search"/><input type="hidden" name="si" value="http://renjianyun.github.io"/><input name="tn" type="hidden" value="bds"/><input name="cl" type="hidden" value="3"/><input name="ct" type="hidden" value="2097152"/><input name="s" type="hidden" value="on"/></form></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Node-js/">Node.js</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/node-js/">node.js</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/Hexo/" style="font-size: 15px;">Hexo</a> <a href="/tags/Git-GitHub/" style="font-size: 15px;">Git/GitHub</a> <a href="/tags/node-js/" style="font-size: 15px;">node.js</a> <a href="/tags/Node-js/" style="font-size: 15px;">Node.js</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最新的文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2016/05/18/Node概述/">Node概述</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/18/Hexo常用设置/">Hexo常用设置</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/18/Hexo简结主题maupassant/">Hexo简洁主题</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/18/Hexo-GitHub搭建个人博客系统/">Hexo+GitHub搭建个人博客系统</a></li><li class="post-list-item"><a class="post-list-link" href="/2016/05/18/hello-world/">Hello World</a></li></ul></div><div class="widget"><div class="comments-title"><i class="fa fa-comment-o"> 最新的评论</i></div><div data-num-items="5" data-show-avatars="0" data-show-time="1" data-show-admin="0" data-excerpt-length="32" data-show-title="1" class="ds-recent-comments"></div></div><div class="widget"><div class="widget-title"><i class="fa fa-external-link"> 友情连接</i></div><ul></ul><a href="http://www.ruanyifeng.com/" title="阮一峰的个人网站" target="_blank">阮一峰的个人网站</a><ul></ul><a href="https://developer.mozilla.org/zh-CN/" title="MDN中文本网" target="_blank">MDN中文本网</a><ul></ul><a href="http://www.liaoxuefeng.com/" title="廖雪峰的官方网站" target="_blank">廖雪峰的官方网站</a></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">© <a href="/." rel="nofollow">任简云的个人博客.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a id="rocket" href="#top" class="show"></a><script type="text/javascript" src="/js/totop.js?v=0.0.0" async></script><script type="text/javascript" src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=0.0.0" async></script><link rel="stylesheet" type="text/css" href="/css/jquery.fancybox.css?v=0.0.0"><script>var duoshuoQuery = {short_name:'renjianyun'};
+(function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+        || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?22b2c5d46b53b29763e05931fb498451";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+  })();
+</script><script type="text/javascript" src="/js/codeblock-resizer.js?v=0.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=0.0.0"></script></div></body></html>
